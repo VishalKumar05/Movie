@@ -3,7 +3,7 @@ package com.example.movie
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 class Splash : AppCompatActivity(){
 
@@ -14,7 +14,7 @@ class Splash : AppCompatActivity(){
         setContentView(R.layout.splash)
 
         Handler().postDelayed({
-            var intent:Intent = Intent(this,Login::class.java)
+            var intent:Intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
 
             finish()

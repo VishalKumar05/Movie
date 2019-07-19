@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F0F0F0">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/login_cardView"
         android:layout_width="310dp"
         android:layout_height="381dp"
@@ -89,18 +89,14 @@
                 android:background="@drawable/signin_button_border"/>
 
 
-            <Button
-                android:id="@+id/google_button"
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/register_button"
-                android:layout_marginTop="23dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginLeft="18dp"
-                android:text="@string/continue_with_google"
-                android:textColor="#263238"
-                android:textFontWeight="2"
-                android:background="@drawable/google_button_border"/>
+                android:layout_marginTop="23dp"/>
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -113,6 +109,6 @@
 
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

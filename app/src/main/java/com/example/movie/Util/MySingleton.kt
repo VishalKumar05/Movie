@@ -2,7 +2,7 @@ package com.example.movie.Util
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.support.v4.util.LruCache
+import androidx.collection.LruCache
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.ImageLoader
@@ -23,7 +23,7 @@ class MySingleton constructor(context: Context) {
     val imageLoader: ImageLoader by lazy {
         ImageLoader(requestQueue,
             object : ImageLoader.ImageCache {
-                private val cache = LruCache<String, Bitmap>(20)
+                private val cache = androidx.collection.LruCache<String, Bitmap>(20)
                 override fun getBitmap(url: String): Bitmap? {
                     return cache.get(url)
                 }

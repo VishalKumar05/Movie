@@ -1,7 +1,7 @@
 package com.example.movie.Adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +14,7 @@ import com.example.movie.Util.MySingleton
 import com.example.movie.R
 import kotlinx.android.synthetic.main.single_card.view.*
 
-class MoviesAdapter(private val context:Context, private val dataList:MutableList<Movie>, private val listener: ItemClickListener) : RecyclerView.Adapter<MoviesAdapter.MyViewHolder>(),Filterable {
+class MoviesAdapter(private val context:Context, private val dataList:MutableList<Movie>, private val listener: ItemClickListener) : androidx.recyclerview.widget.RecyclerView.Adapter<MoviesAdapter.MyViewHolder>(),Filterable {
 
     var imageLoader: ImageLoader? = null
     private var searchQueryList:MutableList<Movie>? = null
@@ -44,7 +44,7 @@ class MoviesAdapter(private val context:Context, private val dataList:MutableLis
         holder.view.tv_rating.text = movie.getMovieRating().toString()
     }
 
-    inner class MyViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+    inner class MyViewHolder(val view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         init {
           view.setOnClickListener(View.OnClickListener {
@@ -57,17 +57,18 @@ class MoviesAdapter(private val context:Context, private val dataList:MutableLis
     override fun getFilter(): Filter {
         return object : Filter(){
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
-                val charString = charSequence.toString()
+                val charString = charSequence.toString().toLowerCase()
                 if (charString.isEmpty()) {
                     searchQueryList = dataList
                 } else {
                     val filteredList = ArrayList<Movie>()
                     for (row in dataList) {
-                        if (row.getMovieName()!!.toLowerCase().contains(charString.toLowerCase())) {
+                        if (row.getMovieName()!!.toLowerCase().contains(charString)) {
                             filteredList.add(row)
                         }
                     }
-                    searchQueryList = filteredList
+                    //searchQueryList = filteredList
+                    searchQueryList!!.addAll(filteredList)
                 }
                 val filterResults = FilterResults()
                 filterResults.values = searchQueryList
@@ -76,7 +77,7 @@ class MoviesAdapter(private val context:Context, private val dataList:MutableLis
             }
 
             override fun publishResults(charSequence: CharSequence?, results: FilterResults?) {
-                searchQueryList = results?.values as MutableList<Movie>?
+                searchQueryList = results!!.values as ArrayList<Movie>?
                 notifyDataSetChanged()
             }
 
