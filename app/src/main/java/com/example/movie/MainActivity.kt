@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity(), MoviesAdapter.ItemClickListener, Googl
     private var mAuthListener : FirebaseAuth.AuthStateListener? = null
     private lateinit var googleApiClient:GoogleApiClient
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+    val analyticsLogEvent = AnalyticsLogEvent()
 
 
     interface ClickListener {
@@ -169,10 +170,14 @@ class MainActivity : AppCompatActivity(), MoviesAdapter.ItemClickListener, Googl
                     }
                 }
                 mAdapter.notifyDataSetChanged()
+                /*val bundle = Bundle()
+                bundle.putString("movie_data", movieData.toString())*/
+                firebaseAnalytics.logEvent(StringConstant.event_category, analyticsLogEvent.eventLog("movie_data","Movie data loaded"))
             },
             Response.ErrorListener { error ->
                 VolleyLog.d("Volley","Error: $error")
                 progress_bar.visibility = View.GONE
+                firebaseAnalytics.logEvent(StringConstant.event_category, analyticsLogEvent.eventLog("volley_error","Error loading data"))
                 Toast.makeText(this,"Error: $error",Toast.LENGTH_SHORT).show()
             }
         )

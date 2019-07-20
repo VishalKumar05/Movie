@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import android.R.attr.password
 import android.content.Intent
 import android.util.Log
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -28,6 +29,7 @@ class SignUp: AppCompatActivity() {
     private var password : EditText? = null
     private var registerButton : Button? = null
     private lateinit var mAuth : FirebaseAuth
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +39,14 @@ class SignUp: AppCompatActivity() {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance()
 
+        // Obtain the FirebaseAnalytics instance.
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
         registerButton?.setOnClickListener(View.OnClickListener {
             performNewUserRegistration()
+            val bundle = Bundle()
+            bundle.putString(FirebaseAnalytics.Param.METHOD, performNewUserRegistration().toString())
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle)
         })
     }
 
