@@ -34,7 +34,7 @@
 
         </activity>
         <activity android:name=".Login"/>
-        <activity android:name=".MovieDetail"/>
+        <activity android:name=".PlayerActivity"/>
         <activity android:name=".SignUp"/>
 
     </application>

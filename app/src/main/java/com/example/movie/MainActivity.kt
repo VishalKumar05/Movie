@@ -6,8 +6,6 @@ import android.content.Context
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.SearchView
 import android.util.Log
@@ -25,7 +23,6 @@ import java.util.ArrayList
 import com.android.volley.toolbox.Volley
 import com.example.movie.Adapter.MoviesAdapter
 import com.example.movie.Model.Movie
-import android.R.string.cancel
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AlertDialog
@@ -129,12 +126,12 @@ class MainActivity : AppCompatActivity(), MoviesAdapter.ItemClickListener, Googl
                 val intent: Intent?
                 when(position){
                     0 -> {
-                        intent = Intent(this@MainActivity,MovieDetail::class.java)
+                        intent = Intent(this@MainActivity,PlayerActivity::class.java)
                         //intent.putExtra("movieName",movieData[position].getMovieName())
                         startActivity(intent)
                     }
                     else -> {
-                        intent = Intent(this@MainActivity,MovieDetail::class.java)
+                        intent = Intent(this@MainActivity,PlayerActivity::class.java)
                         //intent.putExtra("movieName",movieData[position].getMovieName())
                         startActivity(intent)
                     }

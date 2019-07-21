@@ -4,9 +4,9 @@ import android.os.Bundle
 
 class AnalyticsLogEvent {
 
-    fun eventLog(event:String, msg: String):Bundle{
+    fun eventLog(key:String, msg: String):Bundle{
         val bundle = Bundle()
-        bundle.putString(event, msg)
+        bundle.putString(key, msg)
         return bundle
     }
 

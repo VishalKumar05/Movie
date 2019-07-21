@@ -2,7 +2,6 @@ package com.example.movie
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -10,7 +9,6 @@ import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import kotlinx.android.synthetic.main.movie_detail.*
@@ -18,9 +16,9 @@ import com.google.android.exoplayer2.ExoPlayer
 
 
 
-class MovieDetail : AppCompatActivity() {
+class PlayerActivity : AppCompatActivity() {
 
-    private val TAG:String = MovieDetail::class.java.simpleName
+    private val TAG:String = PlayerActivity::class.java.simpleName
     private var player:SimpleExoPlayer? = null
     private var currentWindow:Int = 0
     private var playbackPosition:Int = 0
