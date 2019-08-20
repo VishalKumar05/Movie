@@ -5,8 +5,7 @@ import android.content.Context
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import android.util.Log
 import android.view.*
@@ -26,6 +25,9 @@ import com.example.movie.Model.Movie
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.Constants.StringConstant
 import com.example.movie.Util.Data
 import com.google.android.gms.auth.api.Auth
@@ -117,8 +119,8 @@ class MainActivity : AppCompatActivity(), MoviesAdapter.ItemClickListener, Googl
 
         progress_bar.visibility = View.VISIBLE
         recycler_view.setHasFixedSize(true)
-        recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-        recycler_view!!.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator() as RecyclerView.ItemAnimator?
+        recycler_view.layoutManager = LinearLayoutManager(this)
+        recycler_view!!.itemAnimator = DefaultItemAnimator()
         mAdapter = MoviesAdapter(this, movieData, this)
         recycler_view.adapter = mAdapter
 
@@ -278,7 +280,7 @@ class MainActivity : AppCompatActivity(), MoviesAdapter.ItemClickListener, Googl
         super.onDestroy()
     }
 
-    internal class RecyclerTouchListener(context: Context, recyclerView: RecyclerView, private val clickListener: ClickListener?) : androidx.recyclerview.widget.RecyclerView.OnItemTouchListener {
+    internal class RecyclerTouchListener(context: Context, recyclerView: RecyclerView, private val clickListener: ClickListener?) : RecyclerView.OnItemTouchListener {
 
         private val gestureDetector: GestureDetector
 
