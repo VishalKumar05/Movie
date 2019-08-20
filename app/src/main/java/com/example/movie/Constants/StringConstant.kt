@@ -1,4 +1,4 @@
-package com.example.movie
+package com.example.movie.Constants
 
 class StringConstant {
 

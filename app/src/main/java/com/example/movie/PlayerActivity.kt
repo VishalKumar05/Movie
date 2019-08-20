@@ -1,5 +1,6 @@
 package com.example.movie
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,6 @@ import kotlinx.android.synthetic.main.movie_detail.*
 import com.google.android.exoplayer2.ExoPlayer
 
 
-
 class PlayerActivity : AppCompatActivity() {
 
     private val TAG:String = PlayerActivity::class.java.simpleName
@@ -24,13 +24,16 @@ class PlayerActivity : AppCompatActivity() {
     private var playbackPosition:Int = 0
     private var playWhenReady:Boolean = true
     private var componentListener = ComponentListener()
+    lateinit var mVideoDataUrl:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_detail)
 
-        //var i = getIntent()
-        //var mName = i.getStringExtra("movieName")
+        val i = getIntent()
+       // mVideoData = i.getStringExtra("movieData")
+        mVideoDataUrl = i.getStringExtra("movieData")
+        Log.d("data","Data: ${mVideoDataUrl}")
     }
 
     fun initializePlayer(){
@@ -39,7 +42,8 @@ class PlayerActivity : AppCompatActivity() {
             val defaultTrackSelector = DefaultTrackSelector()
             val defaultLoadControl = DefaultLoadControl()
             player = ExoPlayerFactory.newSimpleInstance(defaultRenderersFactory, defaultTrackSelector, defaultLoadControl)
-            val uri: Uri = Uri.parse("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4")
+            //val uri: Uri = Uri.parse("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4")
+            val uri: Uri = Uri.parse(mVideoDataUrl)
             val mediaSource: MediaSource = buildMediaSource(uri)
             player_view.player = player
             player?.prepare(mediaSource, true, false)
@@ -50,7 +54,7 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun buildMediaSource(uri: Uri): MediaSource {
-        Log.d("Url","2")
+        Log.d("Url","url: $uri")
         return ExtractorMediaSource.Factory(
             DefaultHttpDataSourceFactory("exoplayer-codelab")
         ).createMediaSource(uri)
@@ -115,6 +119,17 @@ class PlayerActivity : AppCompatActivity() {
             player?.release()
             player = null
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Log.d("data","onBackPressed()")
+        //player?.release()
+        //player = null
+        val intent = Intent(this@PlayerActivity,MainActivity::class.java)
+        startActivity(intent)
+        releasePlayer()
+
     }
 
     private inner class ComponentListener : Player.DefaultEventListener() {

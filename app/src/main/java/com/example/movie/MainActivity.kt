@@ -26,6 +26,8 @@ import com.example.movie.Model.Movie
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AlertDialog
+import com.example.movie.Constants.StringConstant
+import com.example.movie.Util.Data
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -55,7 +57,7 @@ class MainActivity : AppCompatActivity(), MoviesAdapter.ItemClickListener, Googl
     private lateinit var googleApiClient:GoogleApiClient
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     val analyticsLogEvent = AnalyticsLogEvent()
-
+    private val data = Data()
 
     interface ClickListener {
         fun onClick(view: View, position: Int)
@@ -116,15 +118,15 @@ class MainActivity : AppCompatActivity(), MoviesAdapter.ItemClickListener, Googl
         progress_bar.visibility = View.VISIBLE
         recycler_view.setHasFixedSize(true)
         recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-        recycler_view!!.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        recycler_view!!.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator() as RecyclerView.ItemAnimator?
         mAdapter = MoviesAdapter(this, movieData, this)
         recycler_view.adapter = mAdapter
 
         recycler_view!!.addOnItemTouchListener(RecyclerTouchListener(this@MainActivity, recycler_view!!, object : ClickListener {
 
             override fun onClick(view: View, position: Int) {
-                val intent: Intent?
-                when(position){
+                //val intent: Intent?
+                /*when(position){
                     0 -> {
                         intent = Intent(this@MainActivity,PlayerActivity::class.java)
                         //intent.putExtra("movieName",movieData[position].getMovieName())
@@ -135,6 +137,15 @@ class MainActivity : AppCompatActivity(), MoviesAdapter.ItemClickListener, Googl
                         //intent.putExtra("movieName",movieData[position].getMovieName())
                         startActivity(intent)
                     }
+                }*/
+
+                for(i in 0..movieData.size){
+                    val intent = Intent(this@MainActivity,PlayerActivity::class.java)
+                    //intent.putExtra("movieData",data.videoList.get(position))
+                    var b = Bundle()
+                    b.putString("movieData",data.videoList.get(position))
+                    intent.putExtras(b)
+                    startActivity(intent)
                 }
             }
             override fun onLongClick(view: View?, position: Int) {
