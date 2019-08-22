@@ -15,9 +15,8 @@ class Splash : AppCompatActivity(){
 
         Handler().postDelayed({
             //var intent:Intent = Intent(this,Login::class.java)
-            var intent:Intent = Intent(this,MainActivity::class.java)
+            val intent:Intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
-
             finish()
         },SPLASH_TIME_OUT)
     }

@@ -36,7 +36,7 @@ class PlayerActivity : AppCompatActivity() {
         Log.d("data","Data: ${mVideoDataUrl}")
     }
 
-    fun initializePlayer(){
+    private fun initializePlayer(){
         if (player == null) {
             val defaultRenderersFactory = DefaultRenderersFactory(this)
             val defaultTrackSelector = DefaultTrackSelector()
