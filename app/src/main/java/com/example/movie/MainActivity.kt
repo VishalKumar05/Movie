@@ -264,12 +264,13 @@ class MainActivity : AppCompatActivity(), MoviesAdapter.ItemClickListener, Googl
     }
 
     override fun onBackPressed() {
-        Log.d("1","BackPressed")
         if (!searchView!!.isIconified){
             searchView!!.isIconified = true
             return
         }
         super.onBackPressed()
+        finishAffinity()     // clear all the back stack
+        Log.d("data","onBackPressed()- MainActivity")
     }
 
     override fun onItemClicked(movie: Movie) {

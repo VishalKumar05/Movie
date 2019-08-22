@@ -123,13 +123,9 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        Log.d("data","onBackPressed()")
-        //player?.release()
-        //player = null
         val intent = Intent(this@PlayerActivity,MainActivity::class.java)
         startActivity(intent)
         releasePlayer()
-
     }
 
     private inner class ComponentListener : Player.DefaultEventListener() {
