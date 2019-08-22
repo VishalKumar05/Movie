@@ -84,7 +84,6 @@ class MoviesAdapter(private val context:Context, private val dataList:MutableLis
         }
     }
 
-
     interface ItemClickListener {
         fun onItemClicked(movie: Movie)
     }
